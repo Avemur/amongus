@@ -1,0 +1,257 @@
+[
+  {
+    "type": "image",
+    "x": 0,
+    "y": 0,
+    "source": "mapBg.png"
+  },
+  {
+    "type": "rect",
+    "x": 0,
+    "y": 0,
+    "width": 10,
+    "height": 10,
+    "color": [ 0, 255, 0 ]
+  },
+  {
+    "type": "rect",
+    "x": 1000,
+    "y": 0,
+    "width": 10,
+    "height": 10,
+    "color": [ 0, 255, 0 ]
+  },
+  {
+    "type": "rect",
+    "x": 0,
+    "y": 600,
+    "width": 10,
+    "height": 10,
+    "color": [ 0, 255, 0 ]
+  },
+  {
+    "type": "rect",
+    "x": 1000,
+    "y": 600,
+    "width": 10,
+    "height": 10,
+    "color": [ 0, 255, 0 ]
+  },
+  {
+    "type": "collision",
+    "x": 341,
+    "y": 250,
+    "width": 124,
+    "height": 140
+  },
+  {
+    "type": "collision",
+    "x": 379,
+    "y": 375,
+    "width": 49,
+    "height": 94
+  },
+  {
+    "type": "collision",
+    "x": 215,
+    "y": 450,
+    "width": 300,
+    "height": 48
+  },
+  {
+    "type": "collision",
+    "x": 20,
+    "y": 422,
+    "width": 222,
+    "height": 128
+  },
+  {
+    "type": "collision",
+    "x": 496,
+    "y": 309,
+    "width": 132,
+    "height": 233
+  },
+  {
+    "type": "collision",
+    "x": 132,
+    "y": 126,
+    "width": 40,
+    "height": 333
+  },
+  {
+    "type": "collision",
+    "x": 94,
+    "y": 264,
+    "width": 121,
+    "height": 53
+  },
+  {
+    "type": "collision",
+    "x": 17,
+    "y": 201,
+    "width": 95,
+    "height": 163
+  },
+  {
+    "type": "collision",
+    "x": 198,
+    "y": 206,
+    "width": 102,
+    "height": 159
+  },
+  {
+    "type": "collision",
+    "x": 17,
+    "y": 30,
+    "width": 203,
+    "height": 120
+  },
+  {
+    "type": "collision",
+    "x": 201,
+    "y": 52,
+    "width": 320,
+    "height": 46
+  },
+  {
+    "type": "collision",
+    "x": 378,
+    "y": 84,
+    "width": 45,
+    "height": 43
+  },
+  {
+    "type": "collision",
+    "x": 336,
+    "y": 109,
+    "width": 126,
+    "height": 109
+  },
+  {
+    "type": "collision",
+    "x": 498,
+    "y": 17,
+    "width": 218,
+    "height": 205
+  },
+  {
+    "type": "collision",
+    "x": 538,
+    "y": 194,
+    "width": 52,
+    "height": 144
+  },
+  {
+    "type": "collision",
+    "x": 562,
+    "y": 256,
+    "width": 110,
+    "height": 44
+  },
+  {
+    "type": "collision",
+    "x": 650,
+    "y": 240,
+    "width": 103,
+    "height": 98
+  },
+  {
+    "type": "collision",
+    "x": 604,
+    "y": 404,
+    "width": 229,
+    "height": 49
+  },
+  {
+    "type": "collision",
+    "x": 701,
+    "y": 434,
+    "width": 44,
+    "height": 64
+  },
+  {
+    "type": "collision",
+    "x": 654,
+    "y": 475,
+    "width": 126,
+    "height": 90
+  },
+  {
+    "type": "collision",
+    "x": 802,
+    "y": 371,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "type": "collision",
+    "x": 845,
+    "y": 99,
+    "width": 44,
+    "height": 292
+  },
+  {
+    "type": "collision",
+    "x": 689,
+    "y": 50,
+    "width": 134,
+    "height": 45
+  },
+  {
+    "type": "collision",
+    "x": 800,
+    "y": 17,
+    "width": 108,
+    "height": 94
+  },
+  {
+    "type": "collision",
+    "x": 819,
+    "y": 169,
+    "width": 42,
+    "height": 30
+  },
+  {
+    "type": "collision",
+    "x": 744,
+    "y": 141,
+    "width": 91,
+    "height": 78
+  },
+  {
+    "type": "collision",
+    "x": 870,
+    "y": 244,
+    "width": 51,
+    "height": 33
+  },
+  {
+    "type": "collision",
+    "x": 902,
+    "y": 214,
+    "width": 84,
+    "height": 105
+  },
+  {
+    "type": "task",
+    "x": 388,
+    "y": 266,
+    "name": "fixWiring",
+    "icon": "tasks/eletrical.png"
+  },
+  {
+    "type": "task",
+    "x": 864,
+    "y": 463,
+    "name": "shields",
+    "icon": "tasks/shields.png"
+  },
+  {
+    "type": "task",
+    "x": 28,
+    "y": 253,
+    "name": "fuseTask",
+    "icon": "tasks/fuseTask.png"
+  }
+]
