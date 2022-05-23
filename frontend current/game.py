@@ -4,6 +4,7 @@ from map import Map
 from player import Player
 from taskManager import TaskManager
 from netMain import Multiplayer
+from meeting import Meeting
 
 #main class
 class Game:
@@ -18,15 +19,22 @@ class Game:
         #setting up players
         Player.loadPlayerGraphics(self)
         self.playerList = []
-        self.playerList.append( Player( self, 400, 300, "Red") )
+        p = Player( self, 400, 300, "Red")
         n = input("enter name: ")
         if n != "":
-            self.playerList[0].name = n
+            p.name = n
         c = input("enter color: ")
         if c in Player.colors:
-            self.playerList[0].color = c
-
+            p.color = c
+        x = input("enter player number:")
+        if int(x) % 2 == 0:
+            p.isImpostor = True
+        else:
+            p.isImpostor = False 
+        spawn_sound = pygame.mixer.Sound("spawn.wav")
+        pygame.mixer.Sound.play(spawn_sound)
         #game attributes
+        self.playerList.append(p)
         self.events = []
         self.gameOver = False
         self.fps = 0
@@ -36,6 +44,10 @@ class Game:
 
         #setting up Multiplayer
         self.multi = Multiplayer(self)
+
+        #setting up meetings
+        self.meeting = Meeting(self)
+
         self.multi.updateServer()
 
         #update all graphics
@@ -48,13 +60,14 @@ class Game:
         self.map.updateMapGraphics()
         Player.updatePlayerGrpahics(self)
         self.taskManager.updateIcons()
+        self.meeting.updateGraphics()
 
     #runs every game tick
     def update(self):
 
         #poll all events from queue
         self.events = pygame.event.get()
-        if not self.taskManager.taskActive:
+        if not self.taskManager.taskActive and not self.meeting.active:
             Player.updatePlayerPos(self)
 
         #minimun window size
@@ -73,6 +86,7 @@ class Game:
                 self.map.updateMapGraphics()
                 Player.updatePlayerGrpahics(self)
                 self.taskManager.updateIcons()
+                self.meeting.updateGraphics()
 
         #seeing is game is over
         for event in self.events:
@@ -81,6 +95,9 @@ class Game:
                 self.gameOver = True
 
         #drawing Map
-        self.screen.fill((0,0,0))
-        self.map.draw()
-        self.taskManager.updateTasks()
+        if not self.meeting.active:
+            self.screen.fill((0,0,0))
+            self.map.draw()
+            self.taskManager.updateTasks()
+        else:
+            self.meeting.update()

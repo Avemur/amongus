@@ -253,5 +253,12 @@
     "y": 253,
     "name": "fuseTask",
     "icon": "tasks/fuseTask.png"
+  },
+  {
+    "type": "task",
+    "x": 410,
+    "y": 266,
+    "name": "meeting",
+    "icon": "tasks/meetingButton.png"
   }
 ]

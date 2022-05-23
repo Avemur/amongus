@@ -9,7 +9,8 @@ class Multiplayer:
         self.game = g
         self.client = Client(g)
         self.client.connect()
-        self.updateObj = PlayerUpdateObj()
+        self.updateObj = PlayerUpdateObj(g)
+        self.status = None
         self.updatePlayerObj()
 
     #update player update object

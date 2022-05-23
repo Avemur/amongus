@@ -82,8 +82,9 @@ class Player:
         mainPlayer = game.playerList[0]
         truePlayerSpeed = 100
         playerSpeed = truePlayerSpeed / game.fps
-        
+
         for event in game.events:
+            
             if event.type == pygame.KEYDOWN:
 
                 #setting move direction
@@ -148,7 +149,8 @@ class Player:
         mainPlayer.y += moveDir[1] * playerSpeed
         if colliding(game, mainPlayer):
             mainPlayer.y = oldY
-            
+        #walk_sound = pygame.mixer.Sound("walking.wav")
+        #pygame.mixer.Sound.play(walk_sound)            
         #if outside map, move as close to wall as possible
         if mainPlayer.x < 0:
             mainPlayer.x = 0
@@ -174,7 +176,7 @@ class Player:
         #finding crewmates in
         Player.playersInRange = []
         for p in game.playerList:
-            if game.playerList[0].getHitBox().colliderect( p.getHitBox() ):
+            if game.playerList[0].getHitBox().colliderect(p.getHitBox()):
                 if p.name != game.playerList[0].name:
                     Player.playersInRange.append(p.name)
 
@@ -185,7 +187,8 @@ class Player:
                     for p in game.playerList:
                         if p.name in Player.playersInRange:
                             p.dead = True
-
+                            kill_sound = pygame.mixer.Sound("kill_sound.wav")
+                            pygame.mixer.Sound.play(kill_sound)
     #constructor
     def __init__(self, game, x, y, c, n = "unnamed" ):
         self.game = game
@@ -204,3 +207,4 @@ class Player:
     #returns hitbox
     def getHitBox(self):
         return pygame.Rect( self.x, self.y, self.hitBoxSize[0], self.hitBoxSize[1] )
+    

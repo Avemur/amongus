@@ -79,7 +79,10 @@ class TaskManager:
             #if impostor not tasks will ever be in range
             if r.colliderect( hb ) and not t["done"] and not self.game.playerList[0].isImpostor:
                 self.inRangeTask = t["name"]
-                self.inRangeSurface = TaskManager.font.render( "press space to start " + t["name"] + " task", True, (0,0,0))
+                if t["name"] == "meeting":
+                    self.inRangeSurface = TaskManager.font.render( "press space to start emergency meeting", True, (0,0,0))
+                else:
+                    self.inRangeSurface = TaskManager.font.render( "press space to start " + t["name"] + " task", True, (0,0,0))
 
     #updates tasks
     def updateTasks(self):
@@ -91,6 +94,12 @@ class TaskManager:
                     if self.inRangeTask == tObj.name and not self.taskActive:
                         tObj.start()
                         self.taskActive = True
+
+                if self.inRangeTask == "meeting":
+                    #start meeting
+                    self.game.multi.updateObj.status = "startMeeting"
+                    self.game.multi.updateServer()
+                    self.game.multi.updateObj.status = None
 
         #updating tasks
         if self.taskActive:

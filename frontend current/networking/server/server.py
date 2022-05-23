@@ -3,6 +3,8 @@ import socket
 import threading
 import json
 import time
+import traceback
+import time
 
 #server class
 class GameServer():
@@ -22,6 +24,8 @@ class GameServer():
         self.killed = False
         self.numConns = 0
         self.onlinePlayers = []
+        self.gameStat = "free"
+        self.meetingTimer = None
 
         #server socket obj
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -49,10 +53,13 @@ class GameServer():
 
     #returns a safe player data structure
     def datStruct(self):
-        ds = []
+        playerStruct = []
         for p in self.onlinePlayers:
-            ds.append(p["obj"])
-        return ds
+            playerStruct.append(p["obj"])
+        return {
+        "players": playerStruct,
+        "gameStatus": self.gameStat
+        }
 
     #sends stuff
     def send(self, conn, msg):
@@ -79,6 +86,25 @@ class GameServer():
 
     #dispatches update to everyone
     def dispatchUpdate(self):
+
+        #handeling voting stuff
+        if self.gameStat == "voting":
+            doneVoting = True
+            for p in self.onlinePlayers:
+                if p["obj"]["vote"] == None:
+                    doneVoting = False
+            if doneVoting:
+                print("--results are in--")
+                for p in self.onlinePlayers:
+                    print( p["obj"]["name"] + " voted for " + p["obj"]["vote"] )
+                self.gameStat = "results"
+                self.meetingTimer = time.time()
+        if self.gameStat == "results" and self.meetingTimer != None:
+            if (time.time() - self.meetingTimer) > 12:
+                self.gameStat = "free"
+                self.meetingTimer = None
+                print("ready for next meeting")
+
         mess = json.dumps(self.datStruct())
         for player in self.onlinePlayers:
             conn = player["conn"]
@@ -111,9 +137,18 @@ class GameServer():
                     if msg == self.DISCONNECT_MESSAGE:
                         connected = False
                     else:
+
+                        #successful update
                         p["obj"] = json.loads(msg)
+                        if p["obj"]["status"] != None:
+
+                            #starting meeting
+                            if p["obj"]["status"] == "startMeeting" and self.gameStat == "free":
+                                self.gameStat = "voting"
+                                print("meeting started by " + p["obj"]["name"])
+
             except:
-                print("[client error] a recive failed to \"" + p["obj"]["name"] + "\". they are now removed")
+                print("[client error] a recive failed. they are now removed")
                 connected = False
                 break
 
